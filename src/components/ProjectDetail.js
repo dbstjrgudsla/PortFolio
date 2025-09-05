@@ -41,54 +41,73 @@ const ProjectDetail = () => {
   const projectsData = {
     'dongne': {
       title: '동네형',
-      subtitle: '트레이너와 회원 간 PT 매칭 웹 서비스',
+      subtitle: '트레이너와 회원간 PT를 위한 매칭 웹서비스',
       projectInfo: {
         name: '동네형',
-        duration: '3개월',
-        members: '5명 (프론트엔드 3명, 백엔드 2명)',
+        duration: '2023.12 ~ 2024.03',
+        members: '5명',
         platform: '웹 서비스'
       },
       coreFeatures: [
         '지역 기반 트레이너 검색 및 필터링',
         '실시간 채팅 시스템으로 트레이너-회원 소통',
-        '예약 및 결제 시스템 통합',
-        '리뷰 및 평점 시스템으로 신뢰도 향상'
+        '리뷰 및 평점 시스템으로 신뢰도 향상',
+        '트레이너 프로필 및 경력 관리'
       ],
       architecture: 'React 프론트엔드 - REST API - Node.js 백엔드 - MySQL 데이터베이스',
-      serviceFlow: '회원가입/로그인 → 지역 설정 → 트레이너 검색 → 프로필 확인 → 채팅 상담 → 예약 및 결제 → PT 진행 → 리뷰 작성',
+      serviceFlow: '회원가입/로그인 → 지역 설정 → 트레이너 검색 → 프로필 확인 → 채팅 상담 → PT 진행 → 리뷰 작성',
       myRole: [
-        'React 컴포넌트 설계 및 개발 (검색, 필터링, 프로필 페이지)',
-        'REST API 설계 및 프론트엔드-백엔드 연동',
-        '반응형 웹 디자인 구현 (모바일 최적화)',
-        'Git을 통한 팀 협업 및 코드 리뷰 진행'
+        '메인페이지 개발',
+        '카카오 지도를 활용한 지도 API 활용으로 검색 헬스장 위치 조회 및 검색 기능 구현',
+        '친구 신청 및 id 기반 유저 검색'
       ],
-      technologies: ['REST API', 'React'],
+      troubleShooting: [
+        {
+          title: '카카오 지도 API 연동 오류',
+          problem: '카카오 지도 API 키 인증 및 CORS 정책으로 인한 API 호출 실패',
+          solution: '도메인 등록 및 API 키 재발급, 프록시 서버를 통한 CORS 우회 처리'
+        }
+      ],
+      technologies: ['REST API', 'React', 'Kakao Map API'],
       color: '#2563eb'
     },
     'ttoon': {
       title: 'TTOON',
-      subtitle: 'AI가 만들어주는 일기를 네컷 만화로 바꿔주는 웹서비스',
+      subtitle: '일기를 네컷만화로 바꾸는 TTOON',
       projectInfo: {
         name: 'TTOON',
-        duration: '4개월',
-        members: '4명 (프론트엔드 2명, 백엔드 1명, AI 1명)',
+        duration: '2024.03 ~ 2024.06',
+        members: '6명',
         platform: '웹 서비스'
       },
       coreFeatures: [
-        'AI 기반 일기 텍스트 분석 및 감정 인식',
-        '네컷 만화 자동 생성 및 스타일 커스터마이징',
-        '감정 분석 결과 시각화 대시보드',
-        '만화 저장 및 공유 기능'
+        '사용자 일기 입력',
+        '등장인물 설정하면 네컷그림으로 나오고 스타일 설정가능',
+        '친구끼리 피드 소통 및 친구기능',
+        '좋아요 기능, 팔로우 팔로잉 기능',
+        '만화저장 기능'
       ],
-      architecture: 'React 프론트엔드 - REST API - AWS Lambda - AI 이미지 생성 모델 - AWS S3 스토리지',
+      architecture: 'React 프론트엔드 - REST API - Spring Boot 백엔드 - AI 이미지 생성 모델 - AWS S3 스토리지',
       serviceFlow: '일기 작성 → AI 텍스트 분석 → 감정 및 키워드 추출 → 네컷 만화 생성 → 스타일 선택 → 결과 확인 → 저장/공유',
       myRole: [
-        'React 기반 프론트엔드 전체 개발 (UI/UX 설계 포함)',
-        'REST API 설계 및 백엔드와의 데이터 통신 구현',
-        'AWS S3를 활용한 이미지 업로드 및 관리 시스템 구축',
-        'AWS EC2를 이용한 서버 배포 및 운영'
+        '백엔드 API diagram 같이 설계하고 반응형 웹, 디자인 활용 및 axios와 tailwind css로 개발',
+        '소셜로그인 개발 카카오, 구글',
+        'S3 Cloudfront, Route53 배포',
+        '일기 작성 페이지 및 SNS 형식으로 토큰별 id 값으로 일기 조회 및 친구 신청, 좋아요 기능 등 개발'
       ],
-      technologies: ['AWS EC2', 'S3', 'REST API', 'React'],
+      troubleShooting: [
+        {
+          title: 'axios 백엔드 통신 오류',
+          problem: 'multiform 형식으로 데이터 전송 시 데이터 형식 차이로 인한 통신 오류',
+          solution: 'FormData 객체 사용 및 Content-Type 헤더 설정으로 해결'
+        },
+        {
+          title: 'AWS CloudFront 배포 문제',
+          problem: 'SPA 라우팅 시 404 오류 발생 및 캐시 무효화 문제',
+          solution: 'CloudFront 에러 페이지 설정 및 캐시 정책 수정으로 해결'
+        }
+      ],
+      technologies: ['AWS S3', 'CloudFront', 'Route53', 'REST API', 'React', 'Tailwind CSS'],
       color: '#2563eb'
     },
     'autoalarm': {
@@ -102,17 +121,16 @@ const ProjectDetail = () => {
       },
       architecture: {
         title: '아키텍처',
-        description: 'AWS EKS와 온프레미스 Kubernetes를 결합한 하이브리드 클라우드 아키텍처로 구성하여 알림 서버의 이중화를 구현했습니다. 가격 감지 서버(Proxy Server)는 업비트 API와 WebSocket으로 실시간 연동하며, Spring Boot 기반 Backend 서비스들이 MariaDB와 Redis를 활용해 회원 관리 및 데이터 캐싱을 처리합니다. Prometheus와 Grafana를 통한 모니터링 시스템과 HAProxy 로드밸런서로 고가용성을 보장합니다.'
+        description: '온프레미스에 구축한 쿠버네티스 클러스터와 AWS EKS를 이중화해서 구현하며, CI/CD 파이프라인을 통해 자동 배포 시스템을 구축했습니다. 가격 감지 서버는 업비트 API와 WebSocket으로 실시간 연동하며, Spring Boot 기반 Backend 서비스들이 MariaDB와 Redis를 활용해 회원 관리 및 데이터 캐싱을 처리합니다.'
       },
       myRole: {
         title: '나의 역할',
         details: [
+          'React 기반 프론트엔드 개발',
           '온프레미스 Kubernetes 클러스터 구축 및 AWS EKS와의 하이브리드 클라우드 설계',
-          'Prometheus + Grafana 모니터링 시스템 구축 및 PromQL 쿼리 작성',
-          'HAProxy를 이용한 Active-Active 로드밸런서 구성으로 고가용성 달성',
-          'GitOps 방식의 ArgoCD 기반 자동 배포 파이프라인 구축',
-          'React 기반 실시간 코인 시세 대시보드 개발',
-          'Node.js WebSocket 프록시 서버 개발 및 업비트 API 연동'
+          'Prometheus + Grafana 모니터링 시스템 구축',
+          'HAProxy를 이용한 로드밸런서 구성으로 고가용성 달성',
+          'CI/CD 파이프라인 구축'
         ]
       },
       troubleShooting: {
@@ -128,16 +146,7 @@ const ProjectDetail = () => {
             }
           },
           {
-            title: '2. ArgoCD 배포 오류 문제',
-            details: {
-              background: 'GitOps 파이프라인에서 YAML 파일 구문 오류 및 리소스 충돌로 인한 배포 실패',
-              solution: 'Helm Chart를 이용한 템플릿화, YAML 린터 도구 적용, 단계별 배포 전략 수립',
-              comparison: '수동 kubectl 배포로 인한 휴먼 에러 → 자동화된 GitOps 파이프라인으로 안정적 배포',
-              learning: 'GitOps의 장점과 YAML 관리의 중요성, Helm을 통한 Kubernetes 애플리케이션 패키징 방법 습득'
-            }
-          },
-          {
-            title: '3. 제한된 포트 환경 문제',
+            title: '2. 제한된 포트 환경 문제',
             details: {
               background: '학원 데이터센터 환경에서 외부 접근 가능한 포트가 10개로 제한되어 다수의 마이크로서비스 노출에 어려움',
               solution: 'Ingress Controller를 이용한 단일 진입점 구성, 경로 기반 라우팅으로 여러 서비스를 하나의 포트로 통합',
@@ -146,7 +155,7 @@ const ProjectDetail = () => {
             }
           },
           {
-            title: '4. 리소스 부족 Pod 스케줄링 실패',
+            title: '3. 리소스 부족 Pod 스케줄링 실패',
             details: {
               background: '온프레미스 환경의 제한된 리소스로 인해 모든 Pod가 정상적으로 스케줄링되지 않는 문제',
               solution: 'Resource Requests/Limits 최적화, HPA(Horizontal Pod Autoscaler) 설정, 우선순위 기반 Pod 스케줄링 적용',
@@ -157,7 +166,7 @@ const ProjectDetail = () => {
         ]
       },
       githubUrl: 'https://github.com/Yoonseok-Ji/CoinAlarm-Autoever_School_Project',
-      technologies: ['AWS EKS', 'Kubernetes', 'Prometheus', 'Grafana'],
+      technologies: ['AWS EKS', 'Kubernetes', 'Prometheus', 'Grafana', 'React'],
       color: '#2563eb'
     }
   };
@@ -273,15 +282,45 @@ const ProjectDetail = () => {
             
             {/* 프로젝트 기본 정보 추가 */}
             <div className="project-basic-info">
-              <div className="info-item">
-                <strong>인원:</strong> 2명
-              </div>
-              <div className="info-item">
-                <strong>개발기간:</strong> 2024.12 ~ 2025.02
-              </div>
-              <div className="info-item">
-                <strong>주제:</strong> 하이브리드 클라우드를 이용한 메시지 발송 이중화
-              </div>
+              {projectId === 'autoalarm' && (
+                <>
+                  <div className="info-item">
+                    <strong>인원:</strong> 2명
+                  </div>
+                  <div className="info-item">
+                    <strong>개발기간:</strong> 2024.12 ~ 2025.02
+                  </div>
+                  <div className="info-item">
+                    <strong>주제:</strong> 하이브리드 클라우드를 이용한 메시지 발송 이중화
+                  </div>
+                </>
+              )}
+              {projectId === 'ttoon' && (
+                <>
+                  <div className="info-item">
+                    <strong>인원:</strong> 6명
+                  </div>
+                  <div className="info-item">
+                    <strong>개발기간:</strong> 2024.03 ~ 2024.06
+                  </div>
+                  <div className="info-item">
+                    <strong>주제:</strong> 일기를 네컷만화로 바꾸는 TTOON
+                  </div>
+                </>
+              )}
+              {projectId === 'dongne' && (
+                <>
+                  <div className="info-item">
+                    <strong>인원:</strong> 5명
+                  </div>
+                  <div className="info-item">
+                    <strong>개발기간:</strong> 2023.12 ~ 2024.03
+                  </div>
+                  <div className="info-item">
+                    <strong>주제:</strong> 트레이너와 회원간 PT를 위한 매칭 웹서비스
+                  </div>
+                </>
+              )}
               
               {/* GitHub 링크 */}
               {project.githubUrl && (
@@ -431,6 +470,24 @@ const ProjectDetail = () => {
                         <li key={index}>{role}</li>
                       ))}
                     </ul>
+                  </section>
+                )}
+
+                {/* 트러블 슈팅 */}
+                {project.troubleShooting && (
+                  <section className="project-section full-width">
+                    <h2>트러블 슈팅</h2>
+                    <div className="trouble-list">
+                      {project.troubleShooting.map((trouble, index) => (
+                        <div key={index} className="trouble-item">
+                          <h4>{trouble.title}</h4>
+                          <div className="trouble-content">
+                            <p><strong>문제:</strong> {trouble.problem}</p>
+                            <p><strong>해결:</strong> {trouble.solution}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </section>
                 )}
               </>
