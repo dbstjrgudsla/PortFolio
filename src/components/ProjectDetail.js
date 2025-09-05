@@ -61,13 +61,20 @@ const ProjectDetail = () => {
         '카카오 지도를 활용한 지도 API 활용으로 검색 헬스장 위치 조회 및 검색 기능 구현',
         '친구 신청 및 id 기반 유저 검색'
       ],
-      troubleShooting: [
-        {
-          title: '카카오 지도 API 연동 오류',
-          problem: '카카오 지도 API 키 인증 및 CORS 정책으로 인한 API 호출 실패',
-          solution: '도메인 등록 및 API 키 재발급, 프록시 서버를 통한 CORS 우회 처리'
-        }
-      ],
+      troubleShooting: {
+        title: '트러블 슈팅',
+        cases: [
+          {
+            title: '1. 카카오 지도 API 연동 오류',
+            details: {
+              background: '카카오 지도 API 키 인증 및 CORS 정책으로 인한 API 호출 실패',
+              solution: '도메인 등록 및 API 키 재발급, 프록시 서버를 통한 CORS 우회 처리',
+              comparison: 'API 호출 실패로 지도 기능 미작동 → 정상적인 지도 서비스 및 헬스장 위치 검색 기능 제공',
+              learning: 'API 키 관리의 중요성과 CORS 정책 이해, 프록시 서버를 통한 보안 정책 우회 방법 학습'
+            }
+          }
+        ]
+      },
       technologies: ['REST API', 'React', 'Kakao Map API'],
       color: '#2563eb'
     },
@@ -95,18 +102,29 @@ const ProjectDetail = () => {
         'S3 Cloudfront, Route53 배포',
         '일기 작성 페이지 및 SNS 형식으로 토큰별 id 값으로 일기 조회 및 친구 신청, 좋아요 기능 등 개발'
       ],
-      troubleShooting: [
-        {
-          title: 'axios 백엔드 통신 오류',
-          problem: 'multiform 형식으로 데이터 전송 시 데이터 형식 차이로 인한 통신 오류',
-          solution: 'FormData 객체 사용 및 Content-Type 헤더 설정으로 해결'
-        },
-        {
-          title: 'AWS CloudFront 배포 문제',
-          problem: 'SPA 라우팅 시 404 오류 발생 및 캐시 무효화 문제',
-          solution: 'CloudFront 에러 페이지 설정 및 캐시 정책 수정으로 해결'
-        }
-      ],
+      troubleShooting: {
+        title: '트러블 슈팅',
+        cases: [
+          {
+            title: '1. axios 백엔드 통신 오류',
+            details: {
+              background: 'multiform 형식으로 데이터 전송 시 데이터 형식 차이로 인한 통신 오류',
+              solution: 'FormData 객체 사용 및 Content-Type 헤더 설정으로 해결',
+              comparison: '데이터 전송 실패로 이미지 업로드 불가 → 정상적인 파일 업로드 및 데이터 통신',
+              learning: 'HTTP 요청 시 데이터 형식의 중요성과 FormData 객체 활용법 습득'
+            }
+          },
+          {
+            title: '2. AWS CloudFront 배포 문제',
+            details: {
+              background: 'SPA 라우팅 시 404 오류 발생 및 캐시 무효화 문제',
+              solution: 'CloudFront 에러 페이지 설정 및 캐시 정책 수정으로 해결',
+              comparison: '페이지 새로고침 시 404 오류 → 모든 라우팅에서 정상적인 페이지 로드',
+              learning: 'SPA 배포 시 서버 설정의 중요성과 CDN 캐시 정책 관리 방법 학습'
+            }
+          }
+        ]
+      },
       technologies: ['AWS S3', 'CloudFront', 'Route53', 'REST API', 'React', 'Tailwind CSS'],
       color: '#2563eb'
     },
@@ -121,7 +139,7 @@ const ProjectDetail = () => {
       },
       architecture: {
         title: '아키텍처',
-        description: '온프레미스에 구축한 쿠버네티스 클러스터와 AWS EKS를 이중화해서 구현하며, CI/CD 파이프라인을 통해 자동 배포 시스템을 구축했습니다. 가격 감지 서버는 업비트 API와 WebSocket으로 실시간 연동하며, Spring Boot 기반 Backend 서비스들이 MariaDB와 Redis를 활용해 회원 관리 및 데이터 캐싱을 처리합니다.'
+        description: '온프레미스에 구축한 쿠버네티스 클러스터와 AWS EKS를 이중화해서 구현하며, CI/CD 파이프라인을 통해 자동 배포 시스템을 구축했습니다. WAS 서버는 Redis를 통해 인증번호를 주고 로그인을 할 수 있으며, KAFKA를 통해서 사용자의 알림정보를 전달해주고 알림메세지를 생성합니다. 프로메테우스 & 그라파나를 통해 온프레미스 클러스터에 파드와 내부 서버들의 오류를 모니터링합니다.'
       },
       myRole: {
         title: '나의 역할',
@@ -476,14 +494,28 @@ const ProjectDetail = () => {
                 {/* 트러블 슈팅 */}
                 {project.troubleShooting && (
                   <section className="project-section full-width">
-                    <h2>트러블 슈팅</h2>
-                    <div className="trouble-list">
-                      {project.troubleShooting.map((trouble, index) => (
-                        <div key={index} className="trouble-item">
-                          <h4>{trouble.title}</h4>
-                          <div className="trouble-content">
-                            <p><strong>문제:</strong> {trouble.problem}</p>
-                            <p><strong>해결:</strong> {trouble.solution}</p>
+                    <h2>{project.troubleShooting.title}</h2>
+                    <div className="structured-trouble-list">
+                      {project.troubleShooting.cases.map((troubleCase, index) => (
+                        <div key={index} className="structured-trouble-item">
+                          <h4>{troubleCase.title}</h4>
+                          <div className="trouble-structure">
+                            <div className="trouble-point">
+                              <strong>1. 문제배경</strong>
+                              <p>{troubleCase.details.background}</p>
+                            </div>
+                            <div className="trouble-point">
+                              <strong>2. 해결방법</strong>
+                              <p>{troubleCase.details.solution}</p>
+                            </div>
+                            <div className="trouble-point">
+                              <strong>3. 이전과의 비교</strong>
+                              <p>{troubleCase.details.comparison}</p>
+                            </div>
+                            <div className="trouble-point">
+                              <strong>4. 깨달은 점</strong>
+                              <p>{troubleCase.details.learning}</p>
+                            </div>
                           </div>
                         </div>
                       ))}
